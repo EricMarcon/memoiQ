@@ -1,0 +1,51 @@
+% Tables (of tables, of figures)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+$if(lot)$
+\cleardoublepage
+\LargeMargins
+\listoftables
+$endif$
+
+$if(lof)$
+\cleardoublepage
+\LargeMargins
+\listoffigures
+$endif$
+
+
+% Back cover
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Even page, small margins, no running head, no page number.
+\evenpage
+\SmallMargins
+\thispagestyle{empty}
+
+$if(backcoverfontsize)$
+\begin{$backcoverfontsize$}
+$endif$
+
+$if(backcover)$
+\begin{description}
+
+$for(backcover)$
+\selectlanguage{$backcover.language$}
+\item[$backcover.abstractlabel$]
+$backcover.abstract$
+\item[$backcover.keywordlabel$]
+$for(backcover.keywords)$$backcover.keywords$$sep$, $endfor$.
+~\\
+$endfor$
+
+\end{description}
+$endif$
+
+$if(backcoverfontsize)$
+\end{$backcoverfontsize$}
+$endif$
+
+$if(cover-image)$
+\vspace*{\fill}
+\centering\includegraphics[width=.3\textwidth]{images/logo}
+$endif$

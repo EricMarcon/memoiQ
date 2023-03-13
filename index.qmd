@@ -1,0 +1,56 @@
+# Introduction {-}
+
+<!-- HTML code necessary for key messages --> 
+<img src="images/trombone.png" alt="image" hidden/>
+
+A clarifier:
+
+- \\mainmatter dans modèle, propriété has.front-matter
+- Traitement des auteurs dans title.tex
+- main font et math font dans le modèle
+- paramétrer graphicspath (au lieu de header)
+- options :
+
+```
+# Do not modify
+site: bookdown::bookdown_site
+always_allow_html: true
+graphics: true
+link-citations: true
+colorlinks: true
+csquotes: true
+
+description: "Bookdown template based on LaTeX memoir class"
+```
+
+\\mainmatter génère une erreur au prochain chapitre à cause de babel. Polyglosssia règle le problème:
+
+    % Polyglossia
+    \usepackage{polyglossia}
+    \setmainlanguage{en-US}
+    \setotherlanguage{fr-FR}
+    \setotherlanguage{it}
+
+This document allows you to create a book in PDF format (and ePub format) at the same time as an HTML version to be published on the web.
+The syntax is that of **Markdown** with some extensions.
+
+The book is organized in chapters. 
+Each chapter is an Rmd file, whose name normally begins with its number (e.g. `01-intro.Rmd`).
+All Rmd files in the project folder are actually treated as chapters, sorted by filename.
+The index.Rmd file is special: it contains the document header and the first chapter.
+
+This first chapter is placed in the foreword of the printed book: it should not be numbered (hence the `{-}` code next to the title) in the HTML version.
+It must end with the LaTeX command `\mainmatter` which marks the beginning of the body of the book.
+
+The outline levels start with `#` for chapters (only one per file), `##` for sections, etc.
+
+Compilation in PDF format is done by XeLaTeX, which must be installed.
+
+While writing, it is strongly advised to create only the HTML file, which is much faster than a LaTeX compilation.
+Each chapter can be viewed very quickly by clicking on the _Knit_ button above the source window.
+The entire book is created by clicking on the _Build Book_ button in the RStudio _Build_ window.
+The button's drop-down list allows you to create all documents or limit yourself to one format.
+
+<!-- The \mainmatter command marks the beginning of the LaTeX document body--> 
+<!-- It must not be deleted-->
+% \mainmatter

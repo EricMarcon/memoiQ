@@ -1,0 +1,13 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+# Quarto
+/*.tex
+/*.aux
+/*.log
+/*.pdf
+/*_files/
+/_*/
+/.*/

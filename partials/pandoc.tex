@@ -1,0 +1,204 @@
+% pandoc tempate
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+
+$tightlist.tex()$
+$tables.tex()$
+$graphics.tex()$
+$citations.tex()$
+
+$for(header-includes)$
+$header-includes$
+$endfor$
+
+% Additional content
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Chapter Summary environment
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[tikz]{bclogo}
+\newenvironment{Summary}
+  {\begin{bclogo}[logo=\bctrombone, noborder=true, couleur=lightgray!50]{$chaptersummary$}\parindent0pt}
+  {\end{bclogo}}
+% Syntax:
+%
+%```{block, type='Summary'}
+% Deliver message here.
+% ```
+
+
+% PDF title page to insert
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+$if(pdftitlepage)$
+\usepackage{pdfpages}
+$endif$
+
+% Fonts
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+$if(largemargins)$
+% Font size of side captions and side notes
+\captionnamefont{\scriptsize}
+\captiontitlefont{\scriptsize}
+\renewcommand{\footnotesize}{\tiny}
+$endif$
+
+% Local toc
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{titletoc}
+\newcommand{\toc}[1]{%
+  \startcontents[chapters]%
+  \printcontents[chapters]{}{1}[#1]{}%
+  ~\newline%
+}
+
+
+% Text boxes
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Define a style for mdframed boxes
+\mdfdefinestyle{boxstyle}{
+	skipabove=1.5\topskip,
+	skipbelow=.5\topskip,
+	rightmargin=0pt,
+	leftmargin=0pt,
+	innerrightmargin=7pt,
+	innerleftmargin=7pt,
+	topline=false,
+	bottomline=false,
+	rightline=false,
+	leftline=false,
+	frametitlerule=true,
+	linecolor=black,
+	fontcolor=black,
+	frametitlealignment=\noindent
+}
+
+
+% Layout
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Based on memoir, style companion
+\newcommand{\MemoirChapStyle}{$MemoirChapStyle$}
+\newcommand{\MemoirPageStyle}{$MemoirPageStyle$}
+
+% Space between paragraphs
+\usepackage{parskip}
+  \abnormalparskip{3pt}
+
+% Adjust margin paragraphs vertical position
+\usepackage{marginfix}
+
+
+% Margins
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% allow use of '-',+','/' ans '*' to make simple length computation
+\usepackage{calc}
+
+% Full-width figures utilities
+\newlength\widthw % full width
+\newlength{\rf}
+\newcommand*{\definesHSpace}{
+  \strictpagecheck % slower but efficient detection of odd/even pages
+  \checkoddpage
+  \ifoddpage
+  \setlength{\rf}{0mm}
+  \else
+  \setlength{\rf}{\marginparsep+\marginparwidth}
+  \fi
+}
+
+\makeatletter
+% 1" margins for the front matter.
+\newcommand*{\SmallMargins}{
+  \setlrmarginsandblock{$spinemargin$}{$smallmargin$}{*}
+  \setmarginnotes{0.1in}{0.1in}{0.1in}
+  \setulmarginsandblock{$uppermargin$}{$lowermargin$}{*}
+  \checkandfixthelayout
+  \ch@ngetext
+  \clearpage
+  \setlength{\widthw}{\textwidth+\marginparsep+\marginparwidth}
+  \footnotesatfoot
+  \chapterstyle{\MemoirChapStyle}  % Chapter and page styles must be recalled
+  \pagestyle{\MemoirPageStyle}
+}
+
+% 3" outer margin for the main matter
+$if(largemargins)$
+\newcommand*{\LargeMargins}{
+  \setlrmarginsandblock{$spinemargin$}{$largemargin$}{*}
+  \setmarginnotes{0.2in}{$marginnote$}{0.1in}
+  \setsidecaps{0.2in}{$marginnote$}
+  \setulmarginsandblock{$uppermargin$}{$lowermargin$}{*}
+  \checkandfixthelayout
+  \ch@ngetext
+  \clearpage
+  \setlength{\widthw}{\textwidth+\marginparsep+\marginparwidth}
+  \footnotesinmargin
+  \chapterstyle{\MemoirChapStyle}  % Chapter and page styles must be recalled
+  \pagestyle{\MemoirPageStyle}
+}
+$else$
+\newcommand{\LargeMargins}{\SmallMargins}
+$endif$
+\makeatother
+
+% Figure captions and footnotes in outer margins
+$if(largemargins)$
+\usepackage[margincaption,outercaption,ragged,wide]{sidecap}
+$endif$
+
+
+%% Bibliography
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Repeated citation as author-year-title instead of author-title (modification of footcite:note in verbose-inote.cbx)
+$if(largemargins)$
+\renewbibmacro*{footcite:note}{%
+  \ifnameundef{labelname}
+    {\printfield{label}}
+    {\printnames{labelname}}
+  \setunit*{\nameyeardelim}
+  \iffieldundef{labelyear}
+    {}
+    {\printtext[parens]{\printfield{labelyear}\printfield{userb}}.}
+  \ifsamepage{\the\value{instcount}}{\csuse{cbx@f@\thefield{entrykey}}}
+    {}
+    {\setunit*{\nametitledelim} \printfield[title]{labeltitle}}
+  \setunit*{\addcomma\space}
+  \printtext{
+    \bibstring{seenote}\addnbspace
+    \ref{cbx@\csuse{cbx@f@\thefield{entrykey}}}
+    \iftoggle{cbx:pageref}
+    {
+      \ifsamepage{\the\value{instcount}}  {\csuse{cbx@f@\thefield{entrykey}}}
+      {}
+      {\addcomma\space\bibstring{page}\addnbspace
+      \pageref{cbx@\csuse{cbx@f@\thefield{entrykey}}}
+      }
+    }
+    {}
+  }
+}
+% Normal text in citations, to allow \textcite
+\AtEveryCite{\renewcommand*{\mkbibnamefamily}[1]{\textnormal{#1}}}
+% Add url's to computer softfware and @Misc in general, delete it in other cases
+% in citations...
+\AtEveryCitekey{%
+  \ifentrytype{misc}{%
+  }{%
+  \clearfield{url}%
+  \clearfield{urldate}%
+  }%
+}
+% ... and in bibliography
+\AtEveryBibitem{%
+  \ifentrytype{misc}{%
+  }{%
+  \clearfield{url}%
+  \clearfield{urldate}%
+}%
+}
+$endif$

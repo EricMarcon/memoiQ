@@ -1,0 +1,13 @@
+\frontmatter
+
+% Title page
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+$if(pdftitlepage)$
+\includepdf[pages=1]{$pdftitlepage$}
+\cleardoublepage
+$endif$
+
+$if(maintitlepage)$
+\MainTitlePage{$maintitlepage.epigraph$}{$maintitlepage.credits$}
+$endif$
