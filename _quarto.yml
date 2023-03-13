@@ -121,7 +121,7 @@ format:
       - ItalicFont=*-italic
     include-in-header:
       # This file should not be modified
-      - "header.tex"
+      - "latex/header.tex"
       # File content to be modified by the user
       # - "preamble.tex"
     template-partials:
