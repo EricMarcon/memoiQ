@@ -240,19 +240,33 @@ The HTML document ignores LaTeX commands.
 Languages are declared in the document header.
 
 The main language of the document (`lang`) changes the name of some elements, such as the table of contents.
-The change of language in the document (one of `otherlangs`) is managed in LaTeX but not in HTML by inserting on a new line the following command: 
+The change of language in the document (one of `otherlangs`) is managed in LaTeX (but not fully in HTML).
+
+For a single word, to ensure correct hyphenation in LaTeX, use the following command, ignored un HTML: 
+
+    \foreignlanguage{italian}{ciao}
+
+For a paragraph, to also ensure correct quotes and punctuation spacing, use 
+
 ```
-\selectlanguage{english}
+::: {lang=fr}
+"Bonjour" en français!
+:::
 ```
+
+to obtain:
+
+::: {lang=fr}
+"Bonjour" en français!
+:::
 
 The current language has an effect only in LaTeX output: a space is added before double punctuation in French, the size of spaces is larger at the beginning of sentences in English, etc.
-The `\selectlanguage` command is simply ignored in HTML.
 
-Language codes are used in the header, such as `en-US` but language names are necessary in `\selectlanguage{}`.
+Language codes are used in the header, such as `en-US` but language names are necessary in LaTeX.
 Name matches are listed in table 3 of the polyglossia package documentation[^823].
+Note that this template uses the "babel" package rather than "polyglossia".
 
-[^823]: http://mirrors.ctan.org/macros/unicodetex/latex/polyglossia/polyglossia.pdf
-
+[^823]: <http://mirrors.ctan.org/macros/unicodetex/latex/polyglossia/polyglossia.pdf>
 
 ## Chapter summary
 
@@ -288,7 +302,7 @@ It can be changed for 2 to display subsections too, and so on.
 Boxed text allows summarizing important points out of the main text.
 An example is given here, to define the Pythagorean theorem.
 
-:::{#pythbox .greybox data-latex='[frametitle=(ref:pythbox)]' title='Pythagorean theorem'}
+:::{#pythbox .greybox data-latex='[frametitle=Pythagorean theorem]' title='Pythagorean theorem'}
 For a right triangle, if $c$ denotes the length of the hypotenuse
 and $a$ and $b$ denote the lengths of the other two sides, we have
 

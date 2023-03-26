@@ -1,13 +1,21 @@
+# R
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
 
 # Quarto
+/*_files/
+/_*/
+/.*/
+/.quarto/
+
+# LaTeX
 /*.tex
 /*.aux
 /*.log
 /*.pdf
-/*_files/
-/_*/
-/.*/
+/*.bcf
+
+# Output
+docs/
