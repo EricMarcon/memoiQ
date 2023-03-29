@@ -11,11 +11,13 @@
 /.quarto/
 
 # LaTeX
-/*.tex
 /*.aux
+/*.bcf
+/*.lof
 /*.log
 /*.pdf
-/*.bcf
+/*.tex
+/*.toc
 
 # Output
 docs/
