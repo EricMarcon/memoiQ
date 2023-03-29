@@ -3,10 +3,6 @@
 <!-- HTML code necessary for key messages --> 
 <img src="images/trombone.png" alt="image" hidden/>
 
-Bug:
-
-- babel ne supporte pas les chapitres numérotés.
-
 
 A clarifier:
 
