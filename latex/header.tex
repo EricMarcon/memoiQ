@@ -2,6 +2,7 @@
 
 % memoiR dalef3 chapter style
 % https://ctan.crest.fr/tex-archive/info/latex-samples/MemoirChapStyles/MemoirChapStyles.pdf
+% \so\protect\@chapapp replaces \so\@chapapp or \so will fail with babel
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{soul}
 \definecolor{nicered}{rgb}{.647,.129,.149}
@@ -18,7 +19,7 @@
   \rotatebox{90}{%
     \resizebox{%
 	  \heightof{\usebox{\feline@chapter}}+\depthof{\usebox{\feline@chapter}}}%
-	{!}{\scshape\so\@chapapp}}\quad%
+	{!}{\scshape\so\protect\@chapapp}}\quad%
   \raisebox{\depthof{\usebox{\feline@chapter}}}{\usebox{\feline@chapter}}%
  }
 \newcommand\feline@chm[1][4cm]{%
