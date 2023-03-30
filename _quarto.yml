@@ -4,7 +4,7 @@ project:
   output-dir: docs
 
 book:
-  title: "Title of the Memoir"
+  title: "Memoir Template"
   author: "Eric Marcon"
   date: "10/03/2023"
   description: "Quarto template based on LaTeX memoir class"
@@ -25,7 +25,7 @@ book:
 bibliography: references.bib
 # Language
 lang: en-US
-otherlangs: [fr-FR,it]
+otherlangs: [fr-FR, it]
 
 format:
 
