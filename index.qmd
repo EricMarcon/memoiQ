@@ -69,7 +69,11 @@ set.seed(973)
 
 A clarifier:
 
-- Pas d'espace à Bonjour!
+- Pas d'espace à Bonjour! : https://github.com/jgm/pandoc/issues/8283
+- babel italian non chargé
+- image sur la dernière page
+- tester marges étroites
+- link-citations: true
 
 
 

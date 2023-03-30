@@ -30,8 +30,6 @@ This template focuses on R but can be used with any other code language supporte
 ```{r}
 #| label: fig-pressure
 #| fig.cap: "Figure _title_ with maths : $\\pi$ and cross-reference to @tbl-kable"
-#| out.width: 40%
-#| fig.env: "figure*"
 plot(pressure)
 ```
 
@@ -39,8 +37,6 @@ Figures can be created by  R code (@fig-pressure).
 A label is associated with each figure: its name is given in the `#| label:` option of the chunk that produces it.
 It must start with `fig-`.
 Cross-references are made with the command `@label`, e.g.: `@fig-pressure`.
-
-In PDF, a figure can use the full width of the page by adding the following options to the header of the code chunk that generates it: `fig.env="figure*".
 
 Existing figures are integrated into a piece of code by the `include_graphics()` function, see @fig-logo.
 
