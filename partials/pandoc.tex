@@ -14,12 +14,14 @@ $for(header-includes)$
 $header-includes$
 $endfor$
 
+
 % Additional content
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 $if(graphicspath)$
 \graphicspath{{$graphicspath$/}}
 $endif$
+
 
 % Chapter Summary environment
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -40,6 +42,7 @@ $if(pdftitlepage)$
 \usepackage{pdfpages}
 $endif$
 
+
 % Fonts
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 $if(largemargins)$
@@ -48,6 +51,7 @@ $if(largemargins)$
 \captiontitlefont{\scriptsize}
 \renewcommand{\footnotesize}{\tiny}
 $endif$
+
 
 % Local toc
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -207,9 +211,9 @@ $if(largemargins)$
 }
 $endif$
 
+
 % memoiR dalef3 chapter style
 % https://ctan.crest.fr/tex-archive/info/latex-samples/MemoirChapStyles/MemoirChapStyles.pdf
-% \so\protect\@chapapp replaces \so\@chapapp or \so will fail with babel
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{soul}
 \definecolor{nicered}{rgb}{.647,.129,.149}
@@ -218,6 +222,7 @@ $endif$
 \setlength\dlf@normtxtw{\textwidth}
 \def\myhelvetfont{\def\sfdefault{mdput}}
 \newsavebox{\feline@chapter}
+% \so\protect\@chapapp replaces \so\@chapapp or \so will fail with babel
 \newcommand\feline@chapter@marker[1][4cm]{%
   \sbox\feline@chapter{%
     \resizebox{!}{#1}{\fboxsep=1pt%
@@ -245,6 +250,7 @@ $endif$
 }
 \makeatother
 
+
 % scriptsize code
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \let\oldverbatim\verbatim
@@ -252,6 +258,12 @@ $endif$
 % Applies to code blocks and R code results
 % code chunk options size='scriptsize' applies only to R code and results
 % if the code chunk sets a different size, \def\verbatim{...} is prioritary for code results
+
+
+% Strict localized quotes
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Comes before \usepackage{csquotes} in pandoc template
+\usepackage[strict,autostyle]{csquotes}
 
 % End of pandoc.tex. Two line feeds are necessary to avoid commenting the next command
 
