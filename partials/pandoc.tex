@@ -15,6 +15,21 @@ $header-includes$
 $endfor$
 
 
+% Languages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Polyglossia
+$if(lang)$
+\usepackage{polyglossia}
+\setmainlanguage{$lang$}
+$for(otherlangs)$
+\setotherlanguage{$otherlangs$}
+$endfor$
+$endif$
+
+% localized quotes
+\usepackage[strict,autostyle]{csquotes}
+
 % Additional content
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

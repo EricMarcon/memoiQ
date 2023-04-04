@@ -66,16 +66,19 @@ set.seed(973)
 ```
 
 
-
+::: {lang=fr}
 A clarifier:
 
-- Pas d'espace à Bonjour! : https://github.com/jgm/pandoc/issues/8283
+- Pas d'espace à "Bonjour": https://github.com/jgm/pandoc/issues/8283
 - babel italian non chargé
-- image sur la dernière page
+- image sur la dernière page!
 - tester marges étroites
+:::
 - link-citations: true
 
+For a single word, to ensure correct hyphenation in LaTeX, use the following command, ignored un HTML: 
 
+> \foreignlanguage{italian}{ciao}
 
 This document allows you to create a book in PDF format (and ePub format) at the same time as an HTML version to be published on the web.
 The syntax is that of **Markdown** with some extensions.
