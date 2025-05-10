@@ -1,84 +1,84 @@
-# Full list of options on https://quarto.org/docs/reference/projects/books.html
 project:
   type: book
   output-dir: docs
 
+# Book options
+# https://quarto.org/docs/reference/projects/books.html
 book:
   title: "Memoir Template"
   author: "Eric Marcon"
   date: "10/03/2023"
   description: "Quarto template based on LaTeX memoir class"
-  repo-url: https://GitHubID.github.io/Repository/
+  site-url: https://GitHubID.github.io/Repository/
+  repo-url: https://github.com/GitHubID/Repository/
+  cover-image: "images/logo.png"
+  favicon: "images/logo.png"
   chapters:
     - index.qmd
     - getting_started.qmd
     - syntax.qmd
     - references.qmd
-  cover-image: "images/logo.png"
-  favicon: "images/logo.png"
   repo-actions: [edit]
   downloads: pdf
-  sharing: [twitter, facebook]
   search: true
 
-# Bibliography file
 bibliography: references.bib
 # Language
 lang: en-US
-otherlangs: [fr-FR, it]
+otherlangs: [fr-FR,it]
+# Table of contents
+toc-depth: 2
+# Section numbering
+secnum-depth: section
 
 format:
-
   html:
-    theme: cosmo
+    theme:
+      - cosmo
+      - brand
     csl: https://www.zotero.org/styles/chicago-author-date
-
   pdf:
     # Paper, font
     papersize: A4
     fontsize: 12pt
-    # Fonts installed by a package. LaTeX tex-gyre package must be installed for:
-    mainfont: texgyretermes            # Times New Roman for the text
-    mathfont: texgyretermes-math.otf   # Times New Roman for equations
     # memoir Style
-    MemoirChapStyle: daleif1           # or companion with large margins
-    MemoirPageStyle: Ruled             # or companion with large margins
+    MemoirChapStyle: companion #daleif1           # or companion with large margins
+    MemoirPageStyle: companion #Ruled             # or companion with large margins
     # Margins
-    largemargins: false                # or true for large margins
+    largemargins: true                # or true for large margins
     smallmargin: 1.5in                 # outer margin (small).
     largemargin: 3in                   # outer margin (large)
     marginnote:  1.8in                 # note width in large margin
     spinemargin: 1.5in                 # spine margin. Reduce to 1.2 with large margins.
     uppermargin: 1.5in                 # upper margin
     lowermargin: 1in                   # lower margin
-
-    # Table of contents
-    toc-depth: 2
-    # Section numbering
-    secnum-depth: section
+    # Fonts installed by a package. LaTeX tex-gyre package must be installed for:
+    mainfont: texgyretermes            # Times New Roman for the text
+    mathfont: texgyretermes-math.otf   # Times New Roman for equations
+    # Bibliography
+    cite-method: biblatex      # Mandatory
+    biblatexoptions:
+      - backend=biber
+      - style=verbose-inote #authoryear-ibid  # or verbose-inote with large margins
+      - pageref=true           # uncomment for verbose-inotes style
+      - isbn=false
+      - backref=true
+      - giveninits=true
+      - uniquename=init
+      - maxcitenames=2
+      - maxbibnames=150
+      - sorting=nyt
+      - sortcites=false
+    longbibliography: false    # if true, two columns and smaller font in PDF
     # List of tables / Figures
     lot: false
     lof: true
-    # Chapter summary text
-    chaptersummary: In a Nutshell
-    # Back Cover
-    backcover:
-      - language: english
-        abstract: |
-          English abstract, on the last page.
-
-          This is a bookdown template based on LaTeX memoir class.
-        keywords:
-          - Keyword in English
-          - As a list
-        abstractlabel: Abstract
-        keywordlabel: Keywords
-    backcoverfontsize: normalsize
     # Figure cropping may be set to false if ghostscript is not installed
     fig_crop: true
     # URL color
     urlcolor: blue
-
+    # Chapter summary text
+    chaptersummary: In a Nutshell
     # Title page...
     maintitlepage:
       epigraph: |
@@ -98,29 +98,21 @@ format:
       logo: "images/logo.png"
     # ... or a PDF cover
     pdftitlepage: images/cover.pdf
+    # Back Cover
+    backcover:
+      - language: english
+        abstract: |
+          English abstract, on the last page.
 
-    # Bibliography
-    cite-method: biblatex
-    biblatexoptions:
-      - backend=biber
-      - style=authoryear-ibid  # or verbose-inote with large margins
-      #- pageref=true          # uncomment for verbose-inotes style
-      - isbn=false
-      - backref=true
-      - giveninits=true
-      - uniquename=init
-      - maxcitenames=2
-      - maxbibnames=150
-      - sorting=nyt
-      - sortcites=false
-    longbibliography: false    # if true, two columns and smaller font in PDF
-
-    # Image files folder
-    graphicspath: images
-
+          This is a bookdown template based on LaTeX memoir class.
+        keywords:
+          - Keyword in English
+          - As a list
+        abstractlabel: Abstract
+        keywordlabel: Keywords
+    backcoverfontsize: normalsize
     # Keep the tex file
     keep-tex: true
-
     # Do not modify below
     documentclass: memoir
     classoption:
@@ -133,15 +125,11 @@ format:
       - BoldFont=*-bold
       - BoldItalicFont=*-bolditalic
       - ItalicFont=*-italic
-    include-in-header:
-      # File content can be modified by the user
-      - "latex/preamble.tex"
-    template-partials:
-      - "partials/pandoc.tex"
-      - "partials/title.tex"
-      - "partials/before-body.tex"
-      - "partials/toc.tex"
-      - "partials/biblio.tex"
-      - "partials/after-body.tex"
     csquotes: true
     link-citations: true
+    template-partials:
+      - latex/after-header-includes.latex
+      - latex/toc.tex
+      - latex/biblio.tex
+
+editor: visual
