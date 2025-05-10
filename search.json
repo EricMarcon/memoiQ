@@ -1,0 +1,182 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Memoir Template",
+    "section": "",
+    "text": "Introduction\n\n\n\nA clarifier:\n\nPas d’espace à “Bonjour”: https://github.com/jgm/pandoc/issues/8283\nbabel italian non chargé\nimage sur la dernière page!\ntester marges étroites\n\n\n\nlink-citations: true\n\nFor a single word, to ensure correct hyphenation in LaTeX, use the following command, ignored un HTML:\n\n\n\nThis document allows you to create a book in PDF format (and ePub format) at the same time as an HTML version to be published on the web. The syntax is that of Markdown with some extensions.\nThe book is organized in chapters. Each chapter is an Rmd file, whose name normally begins with its number (e.g. 01-intro.Rmd). All Rmd files in the project folder are actually treated as chapters, sorted by filename. The index.Rmd file is special: it contains the document header and the first chapter.\nThis first chapter is placed in the foreword of the printed book: it should not be numbered (hence the {-} code next to the title) in the HTML version. It must end with the LaTeX command \\mainmatter which marks the beginning of the body of the book.\nThe outline levels start with # for chapters (only one per file), ## for sections, etc.\nCompilation in PDF format is done by XeLaTeX, which must be installed.\nWhile writing, it is strongly advised to create only the HTML file, which is much faster than a LaTeX compilation. Each chapter can be viewed very quickly by clicking on the Knit button above the source window. The entire book is created by clicking on the Build Book button in the RStudio Build window. The button’s drop-down list allows you to create all documents or limit yourself to one format.",
+    "crumbs": [
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "getting_started.html",
+    "href": "getting_started.html",
+    "title": "1  Getting Started",
+    "section": "",
+    "text": "1.1 index.Rmd\nRStudio in version higher than 1 must be used. The bookdown package must be installed.\nFor the creation of the PDF file, an installation of LaTeX is necessary. Under Windows, use MikTex. The automatic download of missing packages (under Windows: MiKTeX settings, Install missing packages=Yes) is required.\nThe main file is index.Rmd which contains the description of the book in its header. All other .Rmd files in the folder contain a chapter: the order of chapters is that of the file names, sorted alphabetically. The references.bib file contains the bibliography.\nThe basic parameters of the project must be entered in the following files.\nIn the file header, enter the title of the work and the name of the author(s).\nThe date field may be kept to display the knitting date automatically.\nThe url field contains the link to the GitHub pages of the project. It is used by build_readme().\nThe github-repo field contains the name of the repository of the project on GitHub. It is used to build a link to the repository from the menu bar of the GitBook version of the document.\ndescription is used by build_readme() and to build an HTML meta tag intended for search engines. cover-image is the name of an image file that will be used by social networks when the GitBook is shared. Twitter uses both to build a link to the project. If a PDF file is used as the PDF book cover (see below), a good idea is to export it to PNG and declare the PNG file in cover-image.\nThe cover will be:\nDelete one of the two instructions in the header or both covers will be built, like in the gallery1.\nThe languages are specified according to the IETF language tags, such as “en-US”. The main language (lang) is that of the structure of the document, translating elements such as “chapter”. The other languages (otherlangs) can be used to switch language inside the PDF document to benefit from correct hyphenation.\nThe name of the .bib file containing the references is in bibliography. It must be entered with its .bib extension.\nThe default citation style in HTML outputs is chicago-author-date.csl. Any valid csl file can be used: uncomment the line and enter the file name. Note that PDF outputs use their own style: see below.\nLaTeX specific options are:\nBibliography is managed by BibLaTeX, whose options should not be changed except for the style. It is verbose-inote in documents with large margins to show the full citations in them. The citations are called as notes in the text. authoryear-ibid is suited for small-margin documents: the citations in the text contain author and year, and no footnote is used. The line pageref=true must be deleted or commented out if this style is used or an error may occur during LaTeX compilation.\nlongbibliography formats the bibliography on two columns with a small font when it is set to true. If false, the regular font is used in a single column with small margins.\nThe back cover appears in PDF outputs only. It is designed to to display abstract and keyword in several languages if necessary. The items of backcover are a list:\nbackcoverfontsize may be changed better fit the page size, according to the length of the abstracts.\nSome options should not be modified, including:\nSome may be added to the header:\nFor a student thesis, prepare the cover page with Word, Powerpoint or a DTP program and save it in PDF format, in A4 size. Only the first page of the PDF is used.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Getting Started</span>"
+    ]
+  },
+  {
+    "objectID": "getting_started.html#sec-index",
+    "href": "getting_started.html#sec-index",
+    "title": "1  Getting Started",
+    "section": "",
+    "text": "title: \"Title of the Memoir\" \nauthor: \"Authors' names\"\n\n\n\n\n\n\nthat of a book if the maintitlepage statement is present. The content of epigraph and credits will be written on page 2, with images/logo.pdf.\nthe first page of the PDF file declared in the pdftitlepage instruction if it is present.\n\n\n\n\n\n\n\ndocumentclass: the document class is memoir for this template. The options of the memoir class are listed, not to be changed normally.\npapersize: A4.\nfontsize: 11pt.\nmainfont and mathfont may replace the standard Computer Modern font. Tex Gyre fonts2 are a good choice. Both tex-gyre and tex-gyre-math LaTeX packages must be available.\nMemoirChapStyle and MemoirPageStyle define the style of the document. Two styles are favored: companion for documents with large outer margins containing notes, references and captions, or daleif1 and Ruled for more classical layouts with small margins.\nMargins: choose whether to use largemargins or not, and adjust the other parameters according to that. Margin values should work well in most cases.\ntoc-depth: number of levels in the table of contents, 2 by default (i.e. ### subsections are shown).\nsecnum-depth: The lowest numbered level in the document. Default is section (i.e. ##). Alternatives are chapter (i.e. #), subsection (i.e. ###) or subsubsection (i.e. ####).\nlot and lof to add lists of tables and figures.\n\n\n\n\n\nlanguage: the name of the language, that will be passed to the LaTeX command \\selectlanguage{}.\nabstract: the content of the abstract.\nkeywords: a list of keywords.\nabstractlabel and keywordlabel: the localized text to print before abstract and keywords.\n\n\n\n\nfig_crop: yes to allow cropping of excess margins of figures. GhostScript must be installed. If it is not, or in order to save computing time, the option may be set to no.\n\n\n\nfontfamily: font, lmodern by default.\nlinestretch: line spacing, 1 by default.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Getting Started</span>"
+    ]
+  },
+  {
+    "objectID": "getting_started.html#bookdown.yml",
+    "href": "getting_started.html#bookdown.yml",
+    "title": "1  Getting Started",
+    "section": "1.2 _bookdown.yml",
+    "text": "1.2 _bookdown.yml\nEnter the name of the Rmd file that will be the result of the merging of all chapters and choose if it should be destroyed after use. It will also be the name of the PDF and Word files. The default options will suit most uses.\nbook_filename: \"MyBook\"\ndelete_merged_file: true\nIf the project is hosted on GitHub, indicate its address. Otherwise, delete the line.\nrepo: \"https://github.com/GitHubID/Repository\"\nThe knitted files are stored in the output directory. docs is the good choice for GitHub Pages.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Getting Started</span>"
+    ]
+  },
+  {
+    "objectID": "getting_started.html#output.yml",
+    "href": "getting_started.html#output.yml",
+    "title": "1  Getting Started",
+    "section": "1.3 _output.yml",
+    "text": "1.3 _output.yml\nCustomize the table of contents in HTML format.\nconfig:\n  toc:\n    before: |\n      &lt;li&gt;&lt;a href=\"./\"&gt;Bookdown book&lt;/a&gt;&lt;/li&gt;\n    after: |\n      &lt;li&gt;&lt;a href=\"https://github.com/GitHubID/Repository\"\nUpdate the repository in the bs4 book options.\nbookdown::bs4_book:\n repo: https://github.com/GitHubID/Repository",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Getting Started</span>"
+    ]
+  },
+  {
+    "objectID": "getting_started.html#multilingual-documents",
+    "href": "getting_started.html#multilingual-documents",
+    "title": "1  Getting Started",
+    "section": "1.4 Multilingual documents",
+    "text": "1.4 Multilingual documents\nLanguages are declared in the document header.\nThe main language of the document (lang) changes the name of some elements, such as the table of contents. To use other languages in the text, they must be declared in otherlangs.\nChanging the language has no effect in HTML, but changes hyphenation in PDF output.\nThe language change in basic markdown format,\n::: {lang=en-US}\nis not supported by R Markdown. See the correct syntax in section Section 2.9.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Getting Started</span>"
+    ]
+  },
+  {
+    "objectID": "getting_started.html#footnotes",
+    "href": "getting_started.html#footnotes",
+    "title": "1  Getting Started",
+    "section": "",
+    "text": "https://ericmarcon.github.io/memoiR/gallery/memoir/MyBook.pdf↩︎\nhttps://www.ctan.org/pkg/tex-gyre↩︎",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Getting Started</span>"
+    ]
+  },
+  {
+    "objectID": "syntax.html",
+    "href": "syntax.html",
+    "title": "2  Syntax",
+    "section": "",
+    "text": "2.1 R and other code\nhe main features of Markdown are summarized here. The full documentation is online1.\nR code is included in code chunks:\nhead(cars)\n\n  speed dist\n1     4    2\n2     4   10\n3     7    4\n4     7   22\n5     8   16\n6     9   10\nSimilar chunks support other languages such as Python. This template focuses on R but can be used with any other code language supported by Quarto.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Syntax</span>"
+    ]
+  },
+  {
+    "objectID": "syntax.html#figures",
+    "href": "syntax.html#figures",
+    "title": "2  Syntax",
+    "section": "2.2 Figures",
+    "text": "2.2 Figures\n\nplot(pressure)\n\n\n\n\n\n\n\nFigure 2.1: Figure title with maths : \\(\\pi\\) and cross-reference to Table 2.1\n\n\n\n\n\nFigures can be created by R code (Figure 2.1). A label is associated with each figure: its name is given in the #| label: option of the chunk that produces it. It must start with fig-. Cross-references are made with the command @label, e.g.: @fig-pressure.\nExisting figures are integrated into a piece of code by the include_graphics() function, see Figure 2.2.\n\nknitr::include_graphics(\"images/logo.png\")\n\n\n\n\n\n\n\nFigure 2.2: Logo\n\n\n\n\n\nSystematically place these files in the images folder for the automation of GitHub pages.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Syntax</span>"
+    ]
+  },
+  {
+    "objectID": "syntax.html#tables",
+    "href": "syntax.html#tables",
+    "title": "2  Syntax",
+    "section": "2.3 Tables",
+    "text": "2.3 Tables\nThe horizontal - and vertical separators | allow you to draw a table according to Markdown syntax, but this is not the best method in R.\nTables can also be produced by R code. The content of the table is in a dataframe. The kbl() function prepares the table for display and passes the result to kable_styling() for final formatting.\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.2     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\n\n\nTable 2.1: Table created by R, with \\(\\pi\\). Dummy legend to demonstrate formatting capacities.\n\n\n\n\n\n\nSepal length\nWidth\nPetal length\nWidth\nSpecies\n\n\n\n\n5.1\n3.5\n1.4\n0.2\nsetosa\n\n\n4.9\n3.0\n1.4\n0.2\nsetosa\n\n\n4.7\n3.2\n1.3\n0.2\nsetosa\n\n\n4.6\n3.1\n1.5\n0.2\nsetosa\n\n\n5.0\n3.6\n1.4\n0.2\nsetosa\n\n\n5.4\n3.9\n1.7\n0.4\nsetosa\n\n\n\n\n\n\n\n\nThe caption is specified by the #| tbl-cap: chunk option.\nAlways use the booktabs = TRUE argument so that the separator lines are optimal in LaTeX. The bootstrap_options = \"striped\" option provides more readable tables in HTML.\nIn LaTeX, longtable = TRUE selects the “longtable” package to format tables. Such tables are placed in the text. Due to limits of the “longtable” package which does not support multi-column layouts, the Stylish Article template uses a workaround that does not allow really long tables to be split into several columns or pages. So, longtable = TRUE only means that the table will be one-column wide and located in the text if possible. If not, it will float.\nTo use the full width of the page, like Table 2.2, longtable is set to FALSE and table.envir = \"table\" is added in the arguments of kbl().\n\n\n\n\nTable 2.2: Large table with maths, on two columns\n\n\n\n\n\n\nTreatment\nTimber\nThinning\nFuelwood\n\\%AGB lost\n\n\n\n\nControl\n\n\n\n0\n\n\nT1\nDBH $\\geq$ 50 cm, commercial species, $\\approx$ 10 trees/ha\n\n\n$[12\\%-33\\%]$\n\n\nT2\nDBH $\\geq$ 50 cm, commercial species, $\\approx$ 10 trees/ha\nDBH $\\geq$ 40 cm, non-valuable species, $\\approx$ 30 trees/ha\n\n$[33\\%-56\\%]$\n\n\nT3\nDBH $\\geq$ 50 cm, commercial species, $\\approx$ 10 trees/ha\nDBH $\\geq$ 50 cm, non-valuable species, $\\approx$ 15 trees/ha\n40 cm $\\leq$ DBH $\\leq$ 50 cm, non-valuable species, $\\approx$ 15 trees/ha\n$[35\\%-56\\%]$\n\n\n\n\n\n\n\n\nThis table contains mathematics: the escape = FALSE argument is necessary in kable(). This feature is not yet supported by Quarto in the HTML output.\nFinally, the full_width = TRUE argument in kable_styling() adjusts the width of the table to the available width. It must be set for correct formatting of two-column tables in LaTeX.\nNote that tables can’t be shown on the first page of the PDF output of the Stylish Article template: they would conflict with the table of contents.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Syntax</span>"
+    ]
+  },
+  {
+    "objectID": "syntax.html#lists",
+    "href": "syntax.html#lists",
+    "title": "2  Syntax",
+    "section": "2.4 Lists",
+    "text": "2.4 Lists\nLists are indicated by *, + and - (three hierarchical levels) or numbers 1., i. and A. (numbered lists). Indentation of lists indicates their level: *, + and - may be replaced by - at all levels, but four spaces are needed to nest a list into another.\n\nFirst element of a list\n\nsub-list\n\nSecond element\nContinuation of the list\n\nLeave an empty line before and after the list, but not between its items.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Syntax</span>"
+    ]
+  },
+  {
+    "objectID": "syntax.html#math",
+    "href": "syntax.html#math",
+    "title": "2  Syntax",
+    "section": "2.5 Math",
+    "text": "2.5 Math\nEquations in LaTeX format can be inserted inline, like \\(A=\\pi r^2\\) or isolated like \\[e^{i \\pi} = -1.\\]\nThey can be numbered, see Equation 2.1, after adding them a label:\n\\[\n  A = \\pi r^2.\n\\tag{2.1}\\]",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Syntax</span>"
+    ]
+  },
+  {
+    "objectID": "syntax.html#cross-references",
+    "href": "syntax.html#cross-references",
+    "title": "2  Syntax",
+    "section": "2.6 Cross-references",
+    "text": "2.6 Cross-references\nFigures and tables have a label declared in their code chunk option tbl.cap or fig.cap, starting with fig- or tbl-.\nFor equations, the label is added manually by the code {#eq-xxx} after the end of the equation.\nSections can be tagged by ending their title with {#sec-yyy}.\nIn all cases, the call to the reference is made by @.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Syntax</span>"
+    ]
+  },
+  {
+    "objectID": "syntax.html#bibliography",
+    "href": "syntax.html#bibliography",
+    "title": "2  Syntax",
+    "section": "2.7 Bibliography",
+    "text": "2.7 Bibliography\nBibliographic references included in the .bib file declared in the document header can be called by [@CitationKey], in parentheses (Xie, Allaire, and Grolemund 2018), or without square brackets, in the text, as Xie (2016).\nThe bibliography is processed by Pandoc when producing Word or HTML documents. The bibliographic style can be specified, by adding the line\ncsl: file_name.csl\nin the document header and copying the .csl style file to the project folder. More than a thousand styles are available2 and their URL can be used instead of copying the file, e.g.:\ncsl: https://www.zotero.org/styles/xxx\nFor PDF documents, the bibliography is managed by natbib. The style is declared in the header:\nbiblio-style: chicago\nIt can be changed as long as the appropriate .bst file (by default: chicago.bst) is included in the project.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Syntax</span>"
+    ]
+  },
+  {
+    "objectID": "syntax.html#forcing-line-breaks",
+    "href": "syntax.html#forcing-line-breaks",
+    "title": "2  Syntax",
+    "section": "2.8 Forcing line breaks",
+    "text": "2.8 Forcing line breaks\nHyphenation is handled automatically in LaTeX. If a word is not hyphenated correctly, add its hyphenation in the preamble of the file with the command hyphenation (words are separated by spaces, hyphenation locations are represented by dashes).\nIf LaTeX can’t find a solution for the line break, for example because some code is too long a non-breaking block, add the LaTeX command \\break to the line break location. Do not leave a space before the command. The HTML document ignores LaTeX commands.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Syntax</span>"
+    ]
+  },
+  {
+    "objectID": "syntax.html#sec-languages",
+    "href": "syntax.html#sec-languages",
+    "title": "2  Syntax",
+    "section": "2.9 Languages",
+    "text": "2.9 Languages\nLanguages are declared in the document header.\nThe main language of the document (lang) changes the name of some elements, such as the table of contents. The change of language in the document (one of otherlangs) is managed in LaTeX (but not fully in HTML).\nFor a single word, to ensure correct hyphenation in LaTeX, use the following command, ignored un HTML:\n\\foreignlanguage{italian}{ciao}\nFor a paragraph, to also ensure correct quotes and punctuation spacing, use\n::: {lang=fr}\n\"Bonjour\" en français!\n:::\nto obtain:\n\n“Bonjour” en français!\n\nThe current language has an effect only in LaTeX output: a space is added before double punctuation in French, the size of spaces is larger at the beginning of sentences in English, etc.\nLanguage codes are used in the header, such as en-US but language names are necessary in LaTeX. Name matches are listed in table 3 of the polyglossia package documentation3. Note that this template uses the “babel” package rather than “polyglossia”.\n\n\n\n\nXie, Yihui. 2016. Bookdown: Authoring Books and Technical Documents with R Markdown. Boca Raton, Florida: Chapman; Hall/CRC. https://github.com/rstudio/bookdown.\n\n\nXie, Yihui, J. J. Allaire, and Garrett Grolemund. 2018. R Markdown: The Definitive Guide. Boca Raton, Florida: Chapman; Hall/CRC. https://bookdown.org/yihui/rmarkdown.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Syntax</span>"
+    ]
+  },
+  {
+    "objectID": "syntax.html#footnotes",
+    "href": "syntax.html#footnotes",
+    "title": "2  Syntax",
+    "section": "",
+    "text": "https://quarto.org/docs/authoring/markdown-basics.html/↩︎\nhttps://github.com/citation-style-language/styles↩︎\nhttp://mirrors.ctan.org/macros/unicodetex/latex/polyglossia/polyglossia.pdf↩︎",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Syntax</span>"
+    ]
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "Xie, Yihui. 2016. Bookdown: Authoring Books and Technical Documents\nwith R Markdown. Boca Raton, Florida: Chapman;\nHall/CRC. https://github.com/rstudio/bookdown.\n\n\nXie, Yihui, J. J. Allaire, and Garrett Grolemund. 2018. R Markdown:\nThe Definitive Guide. Boca Raton, Florida: Chapman; Hall/CRC. https://bookdown.org/yihui/rmarkdown.",
+    "crumbs": [
+      "References"
+    ]
+  }
+]
