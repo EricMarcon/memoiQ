@@ -14,7 +14,7 @@ install_packages <- function(packages) {
     packages,
     FUN = function(package) {
       if (!package %in% installed.packages()[, 1]) {
-        install.packages(package)
+        install.packages(package, repos = "https://cran.rstudio.com/")
       }
     }
   )
