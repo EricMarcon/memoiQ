@@ -1,6 +1,5 @@
 project:
   type: book
-  output-dir: docs
 
 # Book options
 # https://quarto.org/docs/reference/projects/books.html
