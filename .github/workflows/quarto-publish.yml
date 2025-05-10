@@ -48,6 +48,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
         with:
-          build_dir: public
+          build_dir: _book
           email: ${{ secrets.EMAIL }}
           jekyll: no
