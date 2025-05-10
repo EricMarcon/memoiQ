@@ -56,26 +56,36 @@ The horizontal `-` and vertical separators `|` allow you to draw a table accordi
 
 Tables can also be produced by R code.
 The content of the table is in a dataframe.
-The `kable()` function in the _knitr_ package prepares the table for display and passes the result to the `kable_styling` function in the _kableExtra_ package for final formatting.
+The `kbl()` function prepares the table for display and passes the result to `kable_styling()` for final formatting.
 
 ```{r}
 #| label: tbl-kable
-#| tbl-cap: "Table _created_ by R, with $\\pi$. Not correctly formated as of Quarto v. 1.2."
-#| echo: TRUE
+#| tbl-cap: "Table _created_ by R, with $\\pi$. Dummy legend to demonstrate formatting capacities."
+#| echo: false
 #| tidy: false
-#| warning: FALSE
 
 library("tidyverse")
-names(iris) <- c("Sepal length", "Width", "Petal length", 
-                 "Width", "Species")
-knitr::kable(
-  head(iris), longtable = TRUE, booktabs = TRUE
-) %>%
-  kableExtra::kable_styling(bootstrap_options = "striped")
+names(iris) <- c(
+  "Sepal length", 
+  "Width", 
+  "Petal length", 
+  "Width", 
+  "Species"
+)
+head(iris) %>% 
+  kableExtra::kbl(
+    # Tables can be longer than a page
+    longtable = TRUE, 
+    # Nice separators
+    booktabs = TRUE
+  ) %>%
+  kableExtra::kable_styling(
+    # Striped rows for readability
+    bootstrap_options = "striped"
+  )
 ```
 
 The caption is specified by the `#| tbl-cap:` chunk option.
-At the moment, it is restricted to simple text without format, math or cross references (@tbl-kable), in contrast with figure captions (see @fig-pressure).
 
 Always use the `booktabs = TRUE` argument so that the separator lines are optimal in LaTeX.
 The `bootstrap_options = "striped"` option provides more readable tables in HTML.
@@ -86,41 +96,61 @@ Due to limits of the "longtable" package which does not support multi-column lay
 So, `longtable = TRUE` only means that the table will be one-column wide and located in the text if possible. 
 If not, it will float.
 
-To use the full width of the page, like @tbl-Paracou, `longtable` is set to `FALSE` and `table.envir = "table"` is added in the aguments of `kable()`.
+To use the full width of the page, like @tbl-Paracou, `longtable` is set to `FALSE` and `table.envir = "table"` is added in the arguments of `kbl()`.
 
 ```{r}
 #| label: tbl-Paracou
 #| tbl-cap: "Large table with maths, on two columns"
 #| echo: false
-#| warning: false
 
 Intervention <- data.frame(
-  Treatment=c("Control", "T1", "T2", "T3"),
-  Timber=c("", 
-           "DBH $\\geq$ 50 cm, commercial species, $\\approx$ 10 trees/ha", 
-           "DBH $\\geq$ 50 cm, commercial species, $\\approx$ 10 trees/ha",
-           "DBH $\\geq$ 50 cm, commercial species, $\\approx$ 10 trees/ha"),
-  Thinning=c("", 
-             "", 
-             "DBH $\\geq$ 40 cm, non-valuable species, $\\approx$ 30 trees/ha", 
-             "DBH $\\geq$ 50 cm, non-valuable species, $\\approx$ 15 trees/ha  "),
-  Fuelwood=c("", 
-             "", 
-             "", 
-             "40 cm $\\leq$ DBH $\\leq$ 50 cm, non-valuable species, $\\approx$ 15 trees/ha"),
-  AGBLost=c(0, "$[12\\%-33\\%]$", "$[33\\%-56\\%]$", "$[35\\%-56\\%]$")
+  Treatment = c("Control", "T1", "T2", "T3"),
+  Timber = c(
+    "", 
+    "DBH $\\geq$ 50 cm, commercial species, $\\approx$ 10 trees/ha", 
+    "DBH $\\geq$ 50 cm, commercial species, $\\approx$ 10 trees/ha",
+    "DBH $\\geq$ 50 cm, commercial species, $\\approx$ 10 trees/ha"
+  ),
+  Thinning = c(
+    "", 
+    "", 
+    "DBH $\\geq$ 40 cm, non-valuable species, $\\approx$ 30 trees/ha", 
+    "DBH $\\geq$ 50 cm, non-valuable species, $\\approx$ 15 trees/ha  "
+  ),
+  Fuelwood = c(
+    "", 
+    "", 
+    "", 
+    "40 cm $\\leq$ DBH $\\leq$ 50 cm, non-valuable species, $\\approx$ 15 trees/ha"
+  ),
+  AGBLost = c(0, "$[12\\%-33\\%]$", "$[33\\%-56\\%]$", "$[35\\%-56\\%]$")
 )
 names(Intervention)[5] <- "\\%AGB lost"
-knitr::kable(Intervention, longtable = FALSE, table.envir = "table", booktabs = TRUE, escape = FALSE) %>%
-  kableExtra::kable_styling(bootstrap_options = "striped", full_width = TRUE)
+Intervention %>% 
+  kableExtra::kbl(
+    # Full width table
+    longtable = FALSE, 
+    table.envir = "table", 
+    # Nice separators
+    booktabs = TRUE, 
+    # Special characters in the table
+    escape = FALSE
+  ) %>%
+  kableExtra::kable_styling(
+    # Striped rows for readability
+    bootstrap_options = "striped", 
+    # Full width table
+    full_width = TRUE
+  )
 ```
 
 This table contains mathematics: the `escape = FALSE` argument is necessary in `kable()`.
+This feature is not yet supported by Quarto in the HTML output.
 
 Finally, the `full_width = TRUE` argument in `kable_styling()` adjusts the width of the table to the available width.
 It must be set for correct formatting of two-column tables in LaTeX.
 
-Note that tables can't be shown on the first page of the PDF output of the Stylish Article template: it would conflict with the table of contents.
+Note that tables can't be shown on the first page of the PDF output of the Stylish Article template: they would conflict with the table of contents.
 
 
 ## Lists
